@@ -1,0 +1,160 @@
+index.html
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coming Soon - OurBrand</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <section class="hero">
+      <div class="content">
+        <h3>Coming Soon</h3>
+        <h1>OurBrand's New Website <br />Is Launching Soon 🚀</h1>
+        <p>We’re working hard to finish the development of this site. Stay tuned and subscribe!</p>
+        <form name="submit-to-google-sheet">
+          <input type="email" name="Email" placeholder="Enter your email..." required />
+          <button type="submit"><img src="send-icon.png" width="24px" alt="Send" /></button>
+        </form>
+        <span id="msg"></span>
+      </div>
+    </section>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzenzj0dndujA3Qb_yjSTnB-BWtFwXKFwV0PmovOtUpJn2RrozXMzFXrrjj8uZ5ZRu49g/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      const msg = document.getElementById("msg");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => {
+            msg.innerHTML = "✅ Thank you for subscribing!";
+            setTimeout(() => {
+              msg.innerHTML = "";
+            }, 4000);
+            form.reset();
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
+
+
+style.css
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  body {
+    background-color: #0e0e0e;
+    color: #fff;
+    line-height: 1.6;
+  }
+  
+  .hero {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('background.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .content {
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+  }
+  
+  .content h3 {
+    font-size: 26px;
+    color: #61b752;
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-in;
+  }
+  
+  .content h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: fadeIn 1.2s ease-in;
+  }
+  
+  .content p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    animation: fadeIn 1.4s ease-in;
+  }
+  
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    animation: fadeIn 1.6s ease-in;
+  }
+  
+  form input {
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    width: 350px;
+    border-radius: 8px 0 0 8px;
+    transition: all 0.3s ease;
+  }
+  
+  form input:focus {
+    box-shadow: 0 0 5px rgba(97, 183, 82, 0.6);
+  }
+  
+  form button {
+    padding: 0 20px;
+    background: #61b752;
+    border: none;
+    height: 52px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  form button:hover {
+    background: #4ea843;
+  }
+  
+  span#msg {
+    display: block;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #61b752;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
